@@ -1,0 +1,46 @@
+# Project: NSIS FileSeeker
+# Compiler: Default GCC compiler
+# Compiler Type: MingW 3
+# Makefile created by wxDev-C++ IDE 7.4.2.569 on 30/06/14 21:38
+
+WXLIBNAME = wxmsw29u
+CPP       = g++.exe
+CC        = gcc.exe
+WINDRES   = "windres.exe"
+OBJ       = Objects/MingW/NSIS\ FileSeekerApp.o Objects/MingW/NSIS\ FileSeekerFrm.o Objects/MingW/NSIS_FileSeeker_private.res
+LINKOBJ   = "Objects/MingW/NSIS FileSeekerApp.o" "Objects/MingW/NSIS FileSeekerFrm.o" Objects/MingW/NSIS_FileSeeker_private.res
+LIBS      = -L"C:/Program Files (x86)/Dev-Cpp/lib/wx/gcc_lib" -L"C:/Program Files (x86)/Dev-Cpp/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW32/lib" -L"C:/Program Files (x86)/Dev-Cpp/lib/wx/gcc_lib" -mwindows -lwxmsw29u -lwxmsw29u_gl -lwxtiff -lwxjpeg -lwxpng -lwxzlib -lwxregexu -lwxexpat -lkernel32 -luser32 -lgdi32 -lcomdlg32 -lwinspool -lwinmm -lshell32 -lcomctl32 -lole32 -loleaut32 -luuid -lrpcrt4 -ladvapi32 -lwsock32 -lodbc32 -lopengl32  
+INCS      = -I"C:/Program Files (x86)/Dev-Cpp/MinGW32/include"
+CXXINCS   = -I"C:/Program Files (x86)/Dev-Cpp/MinGW32/include" -I"C:/Program Files (x86)/Dev-Cpp/" -I"C:/Program Files (x86)/Dev-Cpp/include/common"
+RCINCS    = --include-dir "C:/PROGRA~2/Dev-Cpp/include/common"
+BIN       = Output/MingW/NSIS FileSeeker.exe
+DEFINES   = -D__WXMSW__ -D__GNUWIN32__ -D__WIN95__
+CXXFLAGS  = $(CXXINCS) $(DEFINES) -fno-exceptions -fno-pcc-struct-return -fstrict-aliasing -Wall -D__WXMSW__ -D__GNUWIN32__ -D__WIN95__   -fexpensive-optimizations -O3
+CFLAGS    = $(INCS) $(DEFINES) -fno-exceptions -fno-pcc-struct-return -fstrict-aliasing -Wall -D__WXMSW__ -D__GNUWIN32__ -D__WIN95__   -fexpensive-optimizations -O3
+GPROF     = gprof.exe
+ifeq ($(OS),Windows_NT)
+   RM = del /Q
+   FixPath = $(subst /,\,$1)
+else
+   RM = rm -f
+   FixPath = $1
+endif
+LINK      = g++.exe
+
+.PHONY: all all-before all-after clean clean-custom
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	$(RM) $(call FixPath,$(LINKOBJ)) "$(call FixPath,$(BIN))"
+
+$(BIN): $(OBJ)
+	$(LINK) $(LINKOBJ) -o "$(BIN)" $(LIBS) 
+
+Objects/MingW/NSIS\ FileSeekerApp.o: $(GLOBALDEPS) NSIS\ FileSeekerApp.cpp NSIS\ FileSeekerApp.h NSIS\ FileSeekerFrm.h
+	$(CPP) -c "NSIS FileSeekerApp.cpp" -o "Objects/MingW/NSIS FileSeekerApp.o" $(CXXFLAGS)
+
+Objects/MingW/NSIS\ FileSeekerFrm.o: $(GLOBALDEPS) NSIS\ FileSeekerFrm.cpp NSIS\ FileSeekerFrm.h
+	$(CPP) -c "NSIS FileSeekerFrm.cpp" -o "Objects/MingW/NSIS FileSeekerFrm.o" $(CXXFLAGS)
+
+Objects/MingW/NSIS_FileSeeker_private.res: Objects/MingW/NSIS_FileSeeker_private.rc NSIS\ FileSeekerApp.rc 
+	$(WINDRES) --input-format=rc -o Objects/MingW/NSIS_FileSeeker_private.res $(RCINCS) Objects/MingW/NSIS_F~1.RC -O coff
